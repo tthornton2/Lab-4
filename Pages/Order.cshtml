@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>MindSync Premium Subscription</title>
+</head>
+<body>
+
+<div class="container mt-5">
+        @page
+        @model Lab_4.Pages.MindSyncPremiumModel
+            <h3>MindSync Premium Subscription</h3>
+            <p>Ads are how we can keep MindSync prices low and continue our important reasearch. If you would prefer not to recieve ads, please subscribe to MindSync Premium for only $1,999/mo.</p>
+            
+            <form action="/submit" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="serial">Serial Number</label>
+                    <input type="text" class="form-control" id="serial" value="0" name="serial" required>
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="creditCard">Credit Card Number</label>
+                    <input type="text" class="form-control" id="creditCard" name="creditCard" required>
+                    <span asp-validation-for="CreditCard" class="text-danger"></span>
+                </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+</div>
+
+        @if (Model.Name != null && Model.SerialNumber > 0)
+        {
+            <div class="alert alert-success mt-4">
+                Thank you @Model.Name for purchasing the ad-free tier for your MindSync with Serial Number #@Model.SerialNumber.
+            </div>
+        }
+/body>
+</html>
